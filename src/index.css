@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.receipts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.receipt-container {
+  background-color: white;
+  width: 300px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.2;
+}
+
+.receipt-container span {
+  display: inline;
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.receipt-container div[role="feed"] {
+  margin-bottom: 5px;
+}
+
+.receipt-container hr {
+  border: none;
+  border-top: 1px dashed #000;
+  margin: 5px 0;
+}
