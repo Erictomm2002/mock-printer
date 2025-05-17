@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import ReceiptsList from "./components/ReceiptList.jsx";
-import "./index.css";
+import ReceiptsList from "./ReceiptList.jsx";
+import "../index.css";
 import { useSearchParams } from "react-router-dom";
 
-function App() {
+export default function Printer3() {
   const [receiptsXml, setReceiptsXml] = useState([]); // Danh sách các XML <ePOSPrint>
 
   const [searchParams] = useSearchParams();
-  const printerId = searchParams.get("printerId");
-  let globalDeviceId = "local_printer_2";
-  let globalPrintJobId = null;
-
+  const printerId = "Bo9AMdbn9D";
   const simulatePrintRequest = async () => {
     const requestBody = new URLSearchParams();
     requestBody.append("ConnectionType", "GetRequest");
@@ -27,7 +24,6 @@ function App() {
       });
 
       if (response.ok) {
-        console.log("hi");
         const responseXml = await response.text();
         console.log("Server trả về (XML):", responseXml);
 
@@ -36,19 +32,6 @@ function App() {
         if (xmlDoc.documentElement.nodeName === "parsererror") {
           console.error("Error parsing XML");
           return;
-        }
-
-        // Trích xuất thông tin deviceId và printJobId
-        const parameter = xmlDoc.querySelector("ePOSPrint > Parameter");
-        if (parameter) {
-          globalDeviceId =
-            parameter.querySelector("devid")?.textContent || globalDeviceId;
-          globalPrintJobId =
-            parameter.querySelector("printjobid")?.textContent ||
-            globalPrintJobId;
-          console.log(
-            `✔️ Lấy được: deviceId=${globalDeviceId}, printJobId=${globalPrintJobId}`,
-          );
         }
 
         // Trích xuất các <ePOSPrint>
@@ -93,13 +76,19 @@ function App() {
   return (
     <div className="App">
       <h1>
-        Receipts (Live Updates -{" "}
+        Máy in 3 (Bo9AMdbn9D) (Live Updates -{" "}
         {new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })}
       </h1>
+
+      <button
+        onClick={() => {
+          location.reload();
+        }}
+      >
+        Reload
+      </button>
 
       <ReceiptsList receiptsXml={receiptsXml.map((receipt) => receipt.xml)} />
     </div>
   );
 }
-
-export default App;

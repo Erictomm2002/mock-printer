@@ -6,6 +6,9 @@ const Receipt = ({ xmlString }) => {
   useEffect(() => {
     if (!xmlString || !containerRef.current) return;
 
+    // XÓA NỘI DUNG CŨ TRƯỚC KHI APPEND MỚI
+    containerRef.current.innerHTML = "";
+
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "text/xml");
     if (xmlDoc.documentElement.nodeName === "parsererror") {
@@ -70,7 +73,7 @@ const Receipt = ({ xmlString }) => {
         containerRef.current.appendChild(hr);
       }
     }
-  }, []);
+  }, [xmlString]); // 👈 cũng nên thêm xmlString vào dependency để support cập nhật
 
   return <div className="receipt-container" ref={containerRef}></div>;
 };

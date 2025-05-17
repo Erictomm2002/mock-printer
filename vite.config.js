@@ -5,7 +5,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/epson/direct-print": {
-        target: "http://localhost:3005",
+        target: "https://print-station-alpha.infra-2.96digital.de",
         changeOrigin: true,
         secure: false,
         ws: true,
