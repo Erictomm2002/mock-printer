@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import ReceiptsList from "./ReceiptList.jsx";
 import "../index.css";
-import { useSearchParams } from "react-router-dom";
 
 export default function Printer2() {
   const [receiptsXml, setReceiptsXml] = useState([]); // Danh sách các XML <ePOSPrint>
 
-  const [searchParams] = useSearchParams();
   const printerId = "JhbXWyfzL4";
   const simulatePrintRequest = async () => {
     const requestBody = new URLSearchParams();
